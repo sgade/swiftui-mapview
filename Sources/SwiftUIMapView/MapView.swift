@@ -123,9 +123,11 @@ public struct MapView: UIViewRepresentable {
         // basic map configuration
         mapView.mapType = self.mapType
         if let mapRegion = self.region {
-            // FIXME: setRegion(_:animated:) is called way too often (and therefore increases the CPU load)
             let region = mapView.regionThatFits(mapRegion)
-            mapView.setRegion(region, animated: true)
+            
+            if region.center != mapView.region.center || region.span != mapView.region.span {
+                mapView.setRegion(region, animated: true)
+            }
         }
         mapView.showsUserLocation = self.showsUserLocation
         mapView.userTrackingMode = self.userTrackingMode

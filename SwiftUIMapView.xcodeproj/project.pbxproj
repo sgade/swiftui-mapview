@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		451525AB2404568600027181 /* EquatableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451525AA2404568600027181 /* EquatableExtensions.swift */; };
 		451DD1332400125400CBDA1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451DD1322400125400CBDA1A /* AppDelegate.swift */; };
 		451DD1352400125400CBDA1A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451DD1342400125400CBDA1A /* SceneDelegate.swift */; };
 		451DD1372400125400CBDA1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451DD1362400125400CBDA1A /* ContentView.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		451525AA2404568600027181 /* EquatableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableExtensions.swift; sourceTree = "<group>"; };
 		451DD1302400125400CBDA1A /* MapViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		451DD1322400125400CBDA1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		451DD1342400125400CBDA1A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				OBJ_12 /* MapView.swift */,
 				OBJ_9 /* MapAnnotation.swift */,
 				451DD14B24008FC400CBDA1A /* MKMapView+MapAnnotation.swift */,
+				451525AA2404568600027181 /* EquatableExtensions.swift */,
 			);
 			name = SwiftUIMapView;
 			path = Sources/SwiftUIMapView;
@@ -340,6 +343,7 @@
 				OBJ_29 /* MapAnnotationClusterView.swift in Sources */,
 				OBJ_30 /* MapAnnotationView.swift in Sources */,
 				OBJ_31 /* MapView.swift in Sources */,
+				451525AB2404568600027181 /* EquatableExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
