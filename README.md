@@ -14,10 +14,17 @@ Using Xcode, select `File` -> `Swift Packages` -> `Add Package Dependency` and e
 
 ## Usage
 
-In your view, add the map:
+In your view, add the map.
+See the [example project](MapViewExample) for how to integrate the map view.
 
 ```swift
-MapView()
+import SwiftUIMapView
+
+struct ContentView: View {
+    var body: some View {
+        MapView()
+    }
+}
 ```
 
 ### General
