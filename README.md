@@ -5,11 +5,12 @@
 
 [MKMapView](https://developer.apple.com/documentation/mapkit/mkmapview) in SwiftUI.
 
-<img src="assets/screen.png" width="480px">
+[![Social Preview](assets/social-preview.png)](assets/screen.png)
+(Click the image to see the full screenshot)
 
 ## Install
 
-Using Xcode, select `File` -> `Swift Packages` -> `Add Package Dependency` and enter `https://github.com/sgade/swiftui-mapview`. 
+Using Xcode, select `File` -> `Swift Packages` -> `Add Package Dependency` and enter `https://github.com/sgade/swiftui-mapview`.
 
 ## Usage
 
@@ -73,7 +74,7 @@ MapView(zoom: self.$zoom)
 
 ### Adding annotations
 
-Annotations are represented as objects of a custom class that implements the `MapAnnotation` protocol. 
+Annotations are represented as objects of a custom class that implements the `MapAnnotation` protocol.
 It might be helpful to sublcass from existing classes like `MKPlacemark`.
 
 ```swift
