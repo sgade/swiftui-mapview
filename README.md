@@ -5,9 +5,98 @@
 
 [MKMapView](https://developer.apple.com/documentation/mapkit/mkmapview) in SwiftUI.
 
-TODO: Add screenshot of the view.
+<img src="assets/screen.png" width="480px">
+
+## Install
+
+Using Xcode, select `File` -> `Swift Packages` -> `Add Package Dependency` and enter `https://github.com/sgade/swiftui-mapview`. 
 
 ## Usage
 
-TODO:
-- Usage with `Package.swift`.
+In your view, add the map:
+
+```swift
+MapView()
+```
+
+### General
+
+#### Map type
+
+```swift
+MapView(mapType: .standard)
+```
+
+### User location
+
+#### Showing the current user location
+
+The current location can be shown on the map. By default, this is `true`.
+Note that the application requires permission to access the current user location.
+See the documentation on `MapView.showsUserLocation` for more information.
+
+```swift
+MapView(showsUserLocation: true)
+```
+
+#### Tracking the user's location
+
+```swift
+MapView(userTrackingMode: .follow)
+```
+
+### Region
+
+#### Setting the visible region center
+
+The binding passed in for `center` defines the visible region. Setting it to `nil` will use the map's default region when loaded.
+It is also updated when the visible region changes.
+
+```swift
+@State var center: CLLocationCoordinate2D?
+
+MapView(center: self.$center)
+```
+
+#### Setting the visible region zoom
+
+The binding passed in for `zoom` defines the visible region span. A default zoom is used if you do not specify any value.
+It is also updated when the visible region changes.
+
+```swift
+@State var zoom: MKCoordinateSpan
+
+MapView(zoom: self.$zoom)
+```
+
+### Annotations
+
+### Adding annotations
+
+Annotations are represented as objects of a custom class that implements the `MapAnnotation` protocol. 
+It might be helpful to sublcass from existing classes like `MKPlacemark`.
+
+```swift
+let annotations: [MapAnnotation] = ...
+
+MapView(annotation: self.annotations)
+```
+
+### Selecting annotations
+
+A list of selected annotations can be passed in via binding.
+Selecting an annotations updates the binding, and the other way around.
+
+```swift
+@State var selectedAnnotations: [MapAnnotation] = []
+
+MapView(selectedAnnotations: self.$selectedAnnotations)
+```
+
+## Contributing
+
+Feel free to open [issues on GitHub](https://github.com/sgade/swiftui-mapview/issues) or to open [pull requests](https://github.com/sgade/swiftui-mapview/pulls).
+
+## License
+
+This project is licensed unter the terms of the MIT license. See [LICENSE](./LICENSE) for more information.
