@@ -71,6 +71,7 @@
 		451DD1452400127500CBDA1A /* CLLocationCoordinate2D+Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Examples.swift"; sourceTree = "<group>"; };
 		451DD1472400128300CBDA1A /* ExampleAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAnnotation.swift; sourceTree = "<group>"; };
 		451DD14B24008FC400CBDA1A /* MKMapView+MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+MapAnnotation.swift"; sourceTree = "<group>"; };
+		45588B04249CE24000411197 /* SwiftUIMapView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = SwiftUIMapView.podspec; sourceTree = "<group>"; };
 		OBJ_10 /* MapAnnotationClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationClusterView.swift; sourceTree = "<group>"; };
 		OBJ_11 /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
 		OBJ_12 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 			children = (
 				OBJ_22 /* README.md */,
 				OBJ_6 /* Package.swift */,
+				45588B04249CE24000411197 /* SwiftUIMapView.podspec */,
 				OBJ_7 /* Sources */,
 				OBJ_13 /* Tests */,
 				451DD1312400125400CBDA1A /* MapViewExample */,
