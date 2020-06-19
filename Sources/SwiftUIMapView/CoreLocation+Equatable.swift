@@ -1,5 +1,5 @@
 //
-//  EquatableExtensions.swift
+//  CoreLocation+Equatable.swift
 //  SwiftUIMapView
 //
 //  Created by Sören Gade on 24.02.20.
