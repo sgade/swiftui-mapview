@@ -1,6 +1,6 @@
 # swiftui-mapview
 
-![Swift Version](https://img.shields.io/badge/Swift-5.1-orange.svg?logo=swift)
+![Swift Version](https://img.shields.io/badge/Swift-5.2-orange.svg?logo=swift)
 ![Platforms](https://img.shields.io/badge/Platforms-iOS-yellow.svg?logo=apple)
 
 [MKMapView](https://developer.apple.com/documentation/mapkit/mkmapview) in SwiftUI.
