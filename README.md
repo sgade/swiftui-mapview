@@ -81,11 +81,11 @@ MapView(zoom: self.$zoom)
 
 ### Adding annotations
 
-Annotations are represented as objects of a custom class that implements the `MapAnnotation` protocol.
+Annotations are represented as objects of a custom class that implements the `MapViewAnnotation` protocol.
 It might be helpful to sublcass from existing classes like `MKPlacemark`.
 
 ```swift
-let annotations: [MapAnnotation] = ...
+let annotations: [MapViewAnnotation] = ...
 
 MapView(annotation: self.annotations)
 ```
@@ -96,7 +96,7 @@ A list of selected annotations can be passed in via binding.
 Selecting an annotations updates the binding, and the other way around.
 
 ```swift
-@State var selectedAnnotations: [MapAnnotation] = []
+@State var selectedAnnotations: [MapViewAnnotation] = []
 
 MapView(selectedAnnotations: self.$selectedAnnotations)
 ```
