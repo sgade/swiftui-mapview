@@ -19,7 +19,7 @@ import MapKit
  - Author: Sören Gade
  - Copyright: 2020 Sören Gade
  */
-public protocol MapAnnotation: MKAnnotation {
+public protocol MapViewAnnotation: MKAnnotation {
     
     /**
      Identifier for clustering annotations. Setting to a non-`nil` value marks the annotation as participant in clustering.

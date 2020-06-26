@@ -53,7 +53,7 @@ public struct MapView: UIViewRepresentable {
      
      - SeeAlso: selectedAnnotation
      */
-    let annotations: [MapAnnotation]
+    let annotations: [MapViewAnnotation]
     
     /**
      The currently selected annotations.
@@ -61,7 +61,7 @@ public struct MapView: UIViewRepresentable {
      When the user selects annotations on the map the value of this binding changes.
      Likewise, setting the value of this binding to a value selects the given annotations.
      */
-    @Binding var selectedAnnotations: [MapAnnotation]
+    @Binding var selectedAnnotations: [MapViewAnnotation]
 
     // MARK: Initializer
     /**
@@ -79,8 +79,8 @@ public struct MapView: UIViewRepresentable {
                 region: Binding<MKCoordinateRegion?> = .constant(nil),
                 showsUserLocation: Bool = true,
                 userTrackingMode: MKUserTrackingMode = .none,
-                annotations: [MapAnnotation] = [],
-                selectedAnnotations: Binding<[MapAnnotation]> = .constant([])) {
+                annotations: [MapViewAnnotation] = [],
+                selectedAnnotations: Binding<[MapViewAnnotation]> = .constant([])) {
         self.mapType = mapType
         self._region = region
         self.showsUserLocation = showsUserLocation
@@ -144,7 +144,7 @@ public struct MapView: UIViewRepresentable {
      - Parameter mapView: The `MKMapView` to configure.
      */
     private func updateAnnotations(in mapView: MKMapView) {
-        let currentAnnotations = mapView.mapAnnotations
+        let currentAnnotations = mapView.mapViewAnnotations
         // remove old annotations
         let obsoleteAnnotations = currentAnnotations.filter { mapAnnotation in
             !self.annotations.contains { $0.isEqual(mapAnnotation) }
@@ -152,8 +152,8 @@ public struct MapView: UIViewRepresentable {
         mapView.removeAnnotations(obsoleteAnnotations)
         
         // add new annotations
-        let newAnnotations = self.annotations.filter { mapAnnotation in
-            !currentAnnotations.contains { $0.isEqual(mapAnnotation) }
+        let newAnnotations = self.annotations.filter { mapViewAnnotation in
+            !currentAnnotations.contains { $0.isEqual(mapViewAnnotation) }
         }
         mapView.addAnnotations(newAnnotations)
     }
@@ -166,7 +166,7 @@ public struct MapView: UIViewRepresentable {
      */
     private func updateSelectedAnnotation(in mapView: MKMapView) {
         // deselect annotations that are not currently selected
-        let oldSelections = mapView.selectedMapAnnotations.filter { oldSelection in
+        let oldSelections = mapView.selectedMapViewAnnotations.filter { oldSelection in
             !self.selectedAnnotations.contains {
                 oldSelection.isEqual($0)
             }
@@ -177,7 +177,7 @@ public struct MapView: UIViewRepresentable {
         
         // select all new annotations
         let newSelections = self.selectedAnnotations.filter { selection in
-            !mapView.selectedMapAnnotations.contains {
+            !mapView.selectedMapViewAnnotations.contains {
                 selection.isEqual($0)
             }
         }
@@ -201,7 +201,7 @@ public struct MapView: UIViewRepresentable {
         
         // MARK: MKMapViewDelegate
         public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            guard let mapAnnotation = view.annotation as? MapAnnotation else {
+            guard let mapAnnotation = view.annotation as? MapViewAnnotation else {
                 return
             }
             
@@ -209,7 +209,7 @@ public struct MapView: UIViewRepresentable {
         }
         
         public func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-            guard let mapAnnotation = view.annotation as? MapAnnotation else {
+            guard let mapAnnotation = view.annotation as? MapViewAnnotation else {
                 return
             }
             

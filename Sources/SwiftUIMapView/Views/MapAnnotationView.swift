@@ -19,7 +19,7 @@ class MapAnnotationView: MKMarkerAnnotationView {
     
     override var annotation: MKAnnotation? {
         willSet {
-            if let mapAnnotation = newValue as? MapAnnotation {
+            if let mapAnnotation = newValue as? MapViewAnnotation {
                 self.clusteringIdentifier = mapAnnotation.clusteringIdentifier
                 self.markerTintColor = mapAnnotation.tintColor
                 self.glyphImage = mapAnnotation.glyphImage

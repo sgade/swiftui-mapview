@@ -30,9 +30,10 @@
 		451DD13F2400125500CBDA1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 451DD13D2400125500CBDA1A /* LaunchScreen.storyboard */; };
 		451DD1462400127500CBDA1A /* CLLocationCoordinate2D+Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451DD1452400127500CBDA1A /* CLLocationCoordinate2D+Examples.swift */; };
 		451DD1482400128300CBDA1A /* ExampleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451DD1472400128300CBDA1A /* ExampleAnnotation.swift */; };
-		451DD14C24008FC400CBDA1A /* MKMapView+MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451DD14B24008FC400CBDA1A /* MKMapView+MapAnnotation.swift */; };
+		451DD14C24008FC400CBDA1A /* MKMapView+MapViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451DD14B24008FC400CBDA1A /* MKMapView+MapViewAnnotation.swift */; };
 		45588B06249CE47000411197 /* SwiftUIMapView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftUIMapView::SwiftUIMapView::Product" /* SwiftUIMapView.framework */; };
 		45588B07249CE47000411197 /* SwiftUIMapView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftUIMapView::SwiftUIMapView::Product" /* SwiftUIMapView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4592898D24A63F9E0001F8CA /* MapView+Xcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592898C24A63F9E0001F8CA /* MapView+Xcode.swift */; };
 		OBJ_28 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* MapAnnotation.swift */; };
 		OBJ_29 /* MapAnnotationClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* MapAnnotationClusterView.swift */; };
 		OBJ_30 /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* MapAnnotationView.swift */; };
@@ -93,8 +94,9 @@
 		451DD1402400125500CBDA1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		451DD1452400127500CBDA1A /* CLLocationCoordinate2D+Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Examples.swift"; sourceTree = "<group>"; };
 		451DD1472400128300CBDA1A /* ExampleAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAnnotation.swift; sourceTree = "<group>"; };
-		451DD14B24008FC400CBDA1A /* MKMapView+MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+MapAnnotation.swift"; sourceTree = "<group>"; };
+		451DD14B24008FC400CBDA1A /* MKMapView+MapViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+MapViewAnnotation.swift"; sourceTree = "<group>"; };
 		45588B04249CE24000411197 /* SwiftUIMapView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = SwiftUIMapView.podspec; sourceTree = "<group>"; };
+		4592898C24A63F9E0001F8CA /* MapView+Xcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapView+Xcode.swift"; sourceTree = "<group>"; };
 		OBJ_10 /* MapAnnotationClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationClusterView.swift; sourceTree = "<group>"; };
 		OBJ_11 /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
 		OBJ_12 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -230,8 +232,9 @@
 				451DD1492400853E00CBDA1A /* Views */,
 				OBJ_12 /* MapView.swift */,
 				OBJ_9 /* MapAnnotation.swift */,
-				451DD14B24008FC400CBDA1A /* MKMapView+MapAnnotation.swift */,
+				451DD14B24008FC400CBDA1A /* MKMapView+MapViewAnnotation.swift */,
 				451525AA2404568600027181 /* CoreLocation+Equatable.swift */,
+				4592898C24A63F9E0001F8CA /* MapView+Xcode.swift */,
 			);
 			name = SwiftUIMapView;
 			path = Sources/SwiftUIMapView;
@@ -318,7 +321,7 @@
 				TargetAttributes = {
 					451DD12F2400125400CBDA1A = {
 						CreatedOnToolsVersion = 11.3.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -374,7 +377,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				451DD14C24008FC400CBDA1A /* MKMapView+MapAnnotation.swift in Sources */,
+				4592898D24A63F9E0001F8CA /* MapView+Xcode.swift in Sources */,
+				451DD14C24008FC400CBDA1A /* MKMapView+MapViewAnnotation.swift in Sources */,
 				OBJ_28 /* MapAnnotation.swift in Sources */,
 				OBJ_29 /* MapAnnotationClusterView.swift in Sources */,
 				OBJ_30 /* MapAnnotationView.swift in Sources */,
@@ -464,8 +468,9 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"MapViewExample/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -489,6 +494,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = de.sgade.MapViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 5.0;
@@ -528,9 +534,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"MapViewExample/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -549,6 +556,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = de.sgade.MapViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

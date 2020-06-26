@@ -8,7 +8,7 @@
 import SwiftUIMapView
 import MapKit
 
-class ExampleAnnotation: NSObject, MapAnnotation, Identifiable {
+class ExampleAnnotation: NSObject, MapViewAnnotation, Identifiable {
     
     let coordinate: CLLocationCoordinate2D
     

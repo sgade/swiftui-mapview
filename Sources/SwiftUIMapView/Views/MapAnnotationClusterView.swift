@@ -21,7 +21,7 @@ class MapAnnotationClusterView: MKAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
             if let clusterAnnotation = newValue as? MKClusterAnnotation {
-                let mapAnnotations = clusterAnnotation.memberAnnotations.compactMap { $0 as? MapAnnotation }
+                let mapAnnotations = clusterAnnotation.memberAnnotations.compactMap { $0 as? MapViewAnnotation }
                 guard let mapAnnotation = mapAnnotations.first else {
                     return
                 }

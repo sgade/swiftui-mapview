@@ -15,8 +15,8 @@ struct ContentView: View {
     let type: MKMapType = .standard
     @State var region: MKCoordinateRegion? = MKCoordinateRegion(center: .applePark, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     let trackingMode: MKUserTrackingMode = .none
-    let annotations: [MapAnnotation] = [ExampleAnnotation].examples
-    @State var selectedAnnotations: [MapAnnotation] = []
+    let annotations: [MapViewAnnotation] = [ExampleAnnotation].examples
+    @State var selectedAnnotations: [MapViewAnnotation] = []
     
     var body: some View {
         VStack {
