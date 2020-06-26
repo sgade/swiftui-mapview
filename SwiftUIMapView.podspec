@@ -1,9 +1,9 @@
 Pod::Spec.new do |spec|
   spec.name          = "SwiftUIMapView"
-  spec.version       = "1.0.1"
+  spec.version       = "1.1.0"
   spec.summary       = "MKMapView in SwiftUI"
   spec.description   = <<-DESC
-  Allows you to use MKMapview in your SwiftUI app on iOS.
+  Allows you to use MKMapview in your SwiftUI app on iOS 13+.
                    DESC
 
   spec.homepage      = "https://github.com/sgade/swiftui-mapview"
