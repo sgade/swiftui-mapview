@@ -33,6 +33,16 @@ public struct MapView: UIViewRepresentable {
     Note: The region might not be used as-is, as it might need to be fitted to the view's bounds. See [regionThatFits(_:)](https://developer.apple.com/documentation/mapkit/mkmapview/1452371-regionthatfits).
      */
     @Binding var region: MKCoordinateRegion?
+
+    /**
+     Determines whether the map can be zoomed.
+    */
+    let isZoomEnabled: Bool
+
+    /**
+     Determines whether the map can be scrolled.
+    */
+    let isScrollEnabled: Bool
     
     /**
      Determines whether the current user location is displayed.
@@ -77,12 +87,16 @@ public struct MapView: UIViewRepresentable {
      */
     public init(mapType: MKMapType = .standard,
                 region: Binding<MKCoordinateRegion?> = .constant(nil),
+                isZoomEnabled: Bool = true,
+                isScrollEnabled: Bool = true,
                 showsUserLocation: Bool = true,
                 userTrackingMode: MKUserTrackingMode = .none,
                 annotations: [MapViewAnnotation] = [],
                 selectedAnnotations: Binding<[MapViewAnnotation]> = .constant([])) {
         self.mapType = mapType
         self._region = region
+        self.isZoomEnabled = isZoomEnabled
+        self.isScrollEnabled = isScrollEnabled
         self.showsUserLocation = showsUserLocation
         self.userTrackingMode = userTrackingMode
         self.annotations = annotations
@@ -129,6 +143,8 @@ public struct MapView: UIViewRepresentable {
                 mapView.setRegion(region, animated: true)
             }
         }
+        mapView.isZoomEnabled = self.isZoomEnabled
+        mapView.isScrollEnabled = self.isScrollEnabled
         mapView.showsUserLocation = self.showsUserLocation
         mapView.userTrackingMode = self.userTrackingMode
         
