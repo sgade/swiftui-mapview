@@ -223,7 +223,9 @@ public struct MapView: UIViewRepresentable {
                 return
             }
             
-            self.context.selectedAnnotations.append(mapAnnotation)
+            DispatchQueue.main.async {
+                self.context.selectedAnnotations.append(mapAnnotation)
+            }
         }
         
         public func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
@@ -235,11 +237,15 @@ public struct MapView: UIViewRepresentable {
                 return
             }
             
-            self.context.selectedAnnotations.remove(at: index)
+            DispatchQueue.main.async {
+                self.context.selectedAnnotations.remove(at: index)
+            }
         }
         
         public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-            self.context.region = mapView.region
+            DispatchQueue.main.async {
+                self.context.region = mapView.region
+            }
         }
         
     }
