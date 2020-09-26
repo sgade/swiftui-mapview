@@ -7,6 +7,8 @@
 
 [MKMapView](https://developer.apple.com/documentation/mapkit/mkmapview) in SwiftUI.
 
+**For iOS 14 and later, please use Apple's official [Map](https://developer.apple.com/documentation/mapkit/map) view.**
+
 [![Social Preview](assets/social-preview.png)](assets/screen.png)
 (Click the image to see the full screenshot)
 
