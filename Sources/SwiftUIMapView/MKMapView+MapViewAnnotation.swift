@@ -7,6 +7,7 @@
 
 import MapKit
 
+@available(iOS, introduced: 13.0)
 extension MKMapView {
     
     /**
@@ -25,6 +26,7 @@ extension MKMapView {
     
 }
 
+@available(iOS, introduced: 13.0)
 extension Array where Element: MKAnnotation {
     
     /**

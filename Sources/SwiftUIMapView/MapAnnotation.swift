@@ -19,6 +19,7 @@ import MapKit
  - Author: Sören Gade
  - Copyright: 2020 Sören Gade
  */
+@available(iOS, introduced: 13.0)
 public protocol MapViewAnnotation: MKAnnotation {
     
     /**
