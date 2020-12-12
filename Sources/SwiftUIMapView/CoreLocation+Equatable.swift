@@ -5,18 +5,25 @@
 //  Created by Sören Gade on 24.02.20.
 //
 
-import Foundation
-import CoreLocation
-import MapKit
+import MapKit.MKGeometry
 
 extension CLLocationCoordinate2D: Equatable {
-    public static func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
-        lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
+        return lhs.latitude == rhs.latitude
+            && lhs.longitude == rhs.longitude
     }
 }
 
 extension MKCoordinateSpan: Equatable {
-    public static func ==(lhs: MKCoordinateSpan, rhs: MKCoordinateSpan) -> Bool {
-        lhs.latitudeDelta == rhs.latitudeDelta && lhs.longitudeDelta == rhs.longitudeDelta
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
+        return lhs.latitudeDelta == rhs.latitudeDelta
+            && lhs.longitudeDelta == rhs.longitudeDelta
+    }
+}
+
+extension MKCoordinateRegion: Equatable {
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
+        return lhs.center == rhs.center
+            && lhs.span == rhs.span
     }
 }

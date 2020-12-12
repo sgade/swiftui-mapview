@@ -134,10 +134,10 @@ public struct MapView: UIViewRepresentable {
     /// Configures the `mapView`'s state according to the current view state.
     private func configureView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapView>) {
         // Basic map configuration
-        if let mapRegion = self.region {
+        region.map { mapRegion in
             let region = mapView.regionThatFits(mapRegion)
 
-            if region.center != mapView.region.center || region.span != mapView.region.span {
+            if region != mapView.region {
                 mapView.setRegion(region, animated: true)
             }
         }
