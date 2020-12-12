@@ -121,6 +121,12 @@ public struct MapView: UIViewRepresentable {
                          forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
 
         // configure initial view state
+        mapView.mapType = self.mapType
+        mapView.isZoomEnabled = self.isZoomEnabled
+        mapView.isScrollEnabled = self.isScrollEnabled
+        mapView.showsUserLocation = self.showsUserLocation
+        mapView.userTrackingMode = self.userTrackingMode
+
         self.configureView(mapView, context: context)
 
         return mapView
@@ -137,7 +143,6 @@ public struct MapView: UIViewRepresentable {
      */
     private func configureView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapView>) {
         // basic map configuration
-        mapView.mapType = self.mapType
         if let mapRegion = self.region {
             let region = mapView.regionThatFits(mapRegion)
             
@@ -145,10 +150,6 @@ public struct MapView: UIViewRepresentable {
                 mapView.setRegion(region, animated: true)
             }
         }
-        mapView.isZoomEnabled = self.isZoomEnabled
-        mapView.isScrollEnabled = self.isScrollEnabled
-        mapView.showsUserLocation = self.showsUserLocation
-        mapView.userTrackingMode = self.userTrackingMode
         
         // annotation configuration
         self.updateAnnotations(in: mapView)
@@ -257,6 +258,7 @@ public struct MapView: UIViewRepresentable {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         MapView()
+            .edgesIgnoringSafeArea(.all)
     }
 }
 #endif
