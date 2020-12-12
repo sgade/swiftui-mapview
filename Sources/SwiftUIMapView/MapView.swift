@@ -119,6 +119,8 @@ public struct MapView: UIViewRepresentable {
         mapView.showsUserLocation = self.showsUserLocation
         mapView.userTrackingMode = self.userTrackingMode
 
+        region.map { mapView.setRegion($0, animated: false) }
+
         self.configureView(mapView, context: context)
 
         return mapView
