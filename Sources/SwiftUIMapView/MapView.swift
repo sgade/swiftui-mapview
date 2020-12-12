@@ -25,8 +25,7 @@ public struct MapView: UIViewRepresentable {
     /// The map type that is displayed.
     let mapType: MKMapType
 
-    /// A filter that includes or excludes point of interest categories from a map view,
-    /// local search, or local search completer.
+    /// The filter used to determine the points of interest shown on the map.
     let pointOfInterestFilter: MKPointOfInterestFilter?
 
     /// The region that is displayed.
