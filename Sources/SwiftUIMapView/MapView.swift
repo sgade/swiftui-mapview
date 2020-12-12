@@ -106,10 +106,14 @@ public struct MapView: UIViewRepresentable {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         // Register custom annotation view classes
-        mapView.register(MapAnnotationView.self,
-                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        mapView.register(MapAnnotationClusterView.self,
-                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+        mapView.register(
+            MapAnnotationView.self,
+            forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier
+        )
+        mapView.register(
+            MapAnnotationClusterView.self,
+            forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier
+        )
 
         // Configure initial view state
         mapView.mapType = self.mapType
