@@ -25,6 +25,10 @@ public struct MapView: UIViewRepresentable {
     /// The map type that is displayed.
     let mapType: MKMapType
 
+    /// A filter that includes or excludes point of interest categories from a map view,
+    /// local search, or local search completer.
+    let pointOfInterestFilter: MKPointOfInterestFilter?
+
     /// The region that is displayed.
     ///
     /// - Note: The region might not be used as-is, as it might need to be fitted to the view's bounds.
@@ -72,6 +76,7 @@ public struct MapView: UIViewRepresentable {
     ///   - selectedAnnotation: A binding to the currently selected annotation, or `nil`.
     public init(
         mapType: MKMapType = .standard,
+        pointOfInterestFilter: MKPointOfInterestFilter? = nil,
         region: Binding<MKCoordinateRegion?> = .constant(nil),
         isZoomEnabled: Bool = true,
         isScrollEnabled: Bool = true,
@@ -81,6 +86,7 @@ public struct MapView: UIViewRepresentable {
         selectedAnnotations: Binding<[MapViewAnnotation]> = .constant([])
     ) {
         self.mapType = mapType
+        self.pointOfInterestFilter = pointOfInterestFilter
         self._region = region
         self.isZoomEnabled = isZoomEnabled
         self.isScrollEnabled = isScrollEnabled
@@ -108,6 +114,7 @@ public struct MapView: UIViewRepresentable {
 
         // Configure initial view state
         mapView.mapType = self.mapType
+        mapView.pointOfInterestFilter = self.pointOfInterestFilter
         mapView.isZoomEnabled = self.isZoomEnabled
         mapView.isScrollEnabled = self.isScrollEnabled
         mapView.showsUserLocation = self.showsUserLocation
