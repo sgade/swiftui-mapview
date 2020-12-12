@@ -39,6 +39,15 @@ struct ContentView: View {
 MapView(mapType: .standard)
 ```
 
+#### Point of interest filter
+
+You can filter point of interest categories from the map view using a
+[MKPointOfInterestFilter](https://developer.apple.com/documentation/mapkit/mkpointofinterestfilter).
+
+```swift
+MapView(pointOfInterestFilter: .init(including: [.airport]))
+```
+
 ### User location
 
 #### Showing the current user location
@@ -107,7 +116,8 @@ MapView(selectedAnnotations: self.$selectedAnnotations)
 
 ## Contributing
 
-Feel free to open [issues on GitHub](https://github.com/sgade/swiftui-mapview/issues) or to open [pull requests](https://github.com/sgade/swiftui-mapview/pulls).
+Feel free to open [issues on GitHub](https://github.com/sgade/swiftui-mapview/issues)
+or to open [pull requests](https://github.com/sgade/swiftui-mapview/pulls).
 
 ## License
 
