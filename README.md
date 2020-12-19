@@ -107,7 +107,7 @@ MapView(selectedAnnotations: self.$selectedAnnotations)
 
 ## Contributing
 
-Feel free to open [issues on GitHub](https://github.com/sgade/swiftui-mapview/issues) or to open [pull requests](https://github.com/sgade/swiftui-mapview/pulls).
+See the [contributing guide](CONTRIBUTING.md).
 
 ## License
 
