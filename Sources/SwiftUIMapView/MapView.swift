@@ -45,6 +45,11 @@ public struct MapView: UIViewRepresentable {
      Determines whether the map can be scrolled.
     */
     let isScrollEnabled: Bool
+ 
+    /**
+     Determines whether the map can be rotated.
+    */
+    let isRotateEnabled: Bool
     
     /**
      Determines whether the current user location is displayed.
@@ -91,6 +96,7 @@ public struct MapView: UIViewRepresentable {
                 region: Binding<MKCoordinateRegion?> = .constant(nil),
                 isZoomEnabled: Bool = true,
                 isScrollEnabled: Bool = true,
+                isRotateEnabled: Bool = true,
                 showsUserLocation: Bool = true,
                 userTrackingMode: MKUserTrackingMode = .none,
                 annotations: [MapViewAnnotation] = [],
@@ -99,6 +105,7 @@ public struct MapView: UIViewRepresentable {
         self._region = region
         self.isZoomEnabled = isZoomEnabled
         self.isScrollEnabled = isScrollEnabled
+        self.isRotateEnabled = isRotateEnabled
         self.showsUserLocation = showsUserLocation
         self.userTrackingMode = userTrackingMode
         self.annotations = annotations
@@ -147,6 +154,7 @@ public struct MapView: UIViewRepresentable {
         }
         mapView.isZoomEnabled = self.isZoomEnabled
         mapView.isScrollEnabled = self.isScrollEnabled
+        mapView.isRotateEnabled = self.isRotateEnabled
         mapView.showsUserLocation = self.showsUserLocation
         mapView.userTrackingMode = self.userTrackingMode
         
