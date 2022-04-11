@@ -10,9 +10,11 @@ import DeveloperToolsSupport
 
 @available(iOS 14.0, *)
 struct LibraryViewContent: LibraryContentProvider {
+
     @LibraryContentBuilder
     var views: [LibraryItem] {
         LibraryItem(MapView())
     }
+
 }
 #endif

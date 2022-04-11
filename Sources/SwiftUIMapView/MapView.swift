@@ -17,7 +17,7 @@ import UIKit
  See the [official documentation](https://developer.apple.com/documentation/mapkit/mkmapview) for more information on the possibilities provided by the underlying service.
  
  - Author: Sören Gade
- - Copyright: 2020 Sören Gade
+ - Copyright: 2020—2022 Sören Gade
  */
 @available(iOS, introduced: 13.0)
 @available(iOS, deprecated: 14.0, message: "Please consider using the official Map view.")
@@ -252,11 +252,14 @@ public struct MapView: UIViewRepresentable {
     
 }
 
+// MARK: - Previews
+
 #if DEBUG
-// MARK: - SwiftUI Preview
 struct MapView_Previews: PreviewProvider {
+
     static var previews: some View {
         MapView()
     }
+
 }
 #endif

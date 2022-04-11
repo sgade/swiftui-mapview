@@ -14,14 +14,14 @@ extension MKMapView {
      All `MapAnnotations` set on the map view.
      */
     var mapViewAnnotations: [MapViewAnnotation] {
-        self.annotations.filterMapAnnotations()
+        self.annotations.mapViewAnnotations()
     }
     
     /**
      All `MapAnnotations` selected on the map view.
      */
     var selectedMapViewAnnotations: [MapViewAnnotation] {
-        self.selectedAnnotations.filterMapAnnotations()
+        self.selectedAnnotations.mapViewAnnotations()
     }
     
 }
@@ -34,9 +34,8 @@ extension Array where Element: MKAnnotation {
      
      - SeeAlso: MapAnnotation
      */
-    func filterMapAnnotations() -> [MapViewAnnotation] {
-        self.filter { $0 is MapViewAnnotation }
-            .map { $0 as! MapViewAnnotation }
+    func mapViewAnnotations() -> [MapViewAnnotation] {
+        self.compactMap { $0 as? MapViewAnnotation }
     }
     
 }
