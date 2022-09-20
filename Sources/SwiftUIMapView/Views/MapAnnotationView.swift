@@ -19,11 +19,13 @@ class MapAnnotationView: MKMarkerAnnotationView {
     
     override var annotation: MKAnnotation? {
         willSet {
-            if let mapAnnotation = newValue as? MapViewAnnotation {
-                self.clusteringIdentifier = mapAnnotation.clusteringIdentifier
-                self.markerTintColor = mapAnnotation.tintColor
-                self.glyphImage = mapAnnotation.glyphImage
+            guard let mapAnnotation = newValue as? MapViewAnnotation else {
+                return
             }
+
+            clusteringIdentifier = mapAnnotation.clusteringIdentifier
+            markerTintColor = mapAnnotation.tintColor
+            glyphImage = mapAnnotation.glyphImage
         }
     }
     

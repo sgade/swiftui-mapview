@@ -17,20 +17,24 @@ import MapKit
  - SeeAlso: MapAnnotationView
  */
 class MapAnnotationClusterView: MKAnnotationView {
+
+    private static let annotationSize = 32
     
     override var annotation: MKAnnotation? {
         willSet {
-            if let clusterAnnotation = newValue as? MKClusterAnnotation {
-                let mapAnnotations = clusterAnnotation.memberAnnotations.compactMap { $0 as? MapViewAnnotation }
-                guard let mapAnnotation = mapAnnotations.first else {
-                    return
-                }
-                
-                self.collisionMode = .circle
-                
-                let size = CGSize(width: 32, height: 32)
-                self.image = self.drawGlyph(sized: size, colored: mapAnnotation.tintColor, withCount: mapAnnotations.count)
+            guard let clusterAnnotation = newValue as? MKClusterAnnotation else {
+                return
             }
+
+            let mapAnnotations = clusterAnnotation.memberAnnotations.compactMap { $0 as? MapViewAnnotation }
+            guard let mapAnnotation = mapAnnotations.first else {
+                return
+            }
+
+            collisionMode = .circle
+
+            let size = CGSize(width: Self.annotationSize, height: Self.annotationSize)
+            image = drawGlyph(sized: size, colored: mapAnnotation.tintColor, withCount: mapAnnotations.count)
         }
     }
     
@@ -43,9 +47,8 @@ class MapAnnotationClusterView: MKAnnotationView {
             // draw background
             tintColor?.setFill()
             UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: size.width, height: size.height)).fill()
-            
-            if let image = UIImage(systemName: "\(count).circle")?
-                .withTintColor(.white) {
+
+            if let image = UIImage(systemName: "\(count).circle")?.withTintColor(.white) {
                 // draw glyph
                 let imageRect = CGRect(x: size.width / 2 - image.size.width / 2,
                                        y: size.height / 2 - image.size.height / 2,
@@ -57,7 +60,7 @@ class MapAnnotationClusterView: MKAnnotationView {
                 let fontSize: CGFloat = 24
                 let textAttributes: [NSAttributedString.Key: NSObject] = [
                     NSAttributedString.Key.foregroundColor: UIColor.black,
-                    NSAttributedString.Key.font: UIFont(name: "Roboto", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)
                 ]
                 let text = "\(count)" as NSString
                 let textSize = text.size(withAttributes: textAttributes)
