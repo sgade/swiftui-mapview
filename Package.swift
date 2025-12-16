@@ -17,7 +17,10 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftUIMapView",
-            dependencies: []
+            dependencies: [],
+            swiftSettings: [
+                .defaultIsolation(MainActor.self)
+            ]
         )
     ]
 )

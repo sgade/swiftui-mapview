@@ -41,9 +41,15 @@ class MapAnnotationClusterView: MKAnnotationView {
             )
         }
     }
-    
+
+}
+
+// MARK: Drawing glyphs
+
+private extension MapAnnotationClusterView {
+
     /// Draws the annotation's glyph.
-    private func drawGlyph(
+    func drawGlyph(
         sized size: CGSize,
         colored tintColor: UIColor?,
         withCount count: Int
