@@ -30,9 +30,9 @@ struct ContentView: View {
 }
 ```
 
-### General
+## Configuration
 
-#### Map type
+### Map type
 
 ```swift
 MapView(mapType: .standard)
@@ -40,9 +40,9 @@ MapView(mapType: .standard)
 
 ### User location
 
-#### Showing the current user location
+### Showing the current user location
 
-The current location can be shown on the map. By default, this is `true`.
+The current location can be shown on the map.
 Note that the application requires permission to access the current user location.
 See the documentation on `MapView.showsUserLocation` for more information.
 
@@ -50,58 +50,44 @@ See the documentation on `MapView.showsUserLocation` for more information.
 MapView(showsUserLocation: true)
 ```
 
-#### Tracking the user's location
+### Tracking the user's location
 
 ```swift
 MapView(userTrackingMode: .follow)
 ```
 
-### Region
+### Setting the visible region
 
-#### Setting the visible region center
-
-The binding passed in for `center` defines the visible region. Setting it to `nil` will use the map's default region when loaded.
-It is also updated when the visible region changes.
+The binding passed in for `region` defines the visible map region. Use it to define the visible center and zoom.
+Setting it to `nil` will use the map's default region when loaded. It is also updated when the visible region changes.
 
 ```swift
-@State var center: CLLocationCoordinate2D?
+@State var region: MKCoordinateRegion?
 
-MapView(center: self.$center)
-```
-
-#### Setting the visible region zoom
-
-The binding passed in for `zoom` defines the visible region span. A default zoom is used if you do not specify any value.
-It is also updated when the visible region changes.
-
-```swift
-@State var zoom: MKCoordinateSpan
-
-MapView(zoom: self.$zoom)
+MapView(region: $region)
 ```
 
 ### Annotations
 
-### Adding annotations
+#### Adding annotations
 
 Annotations are represented as objects of a custom class that implements the `MapViewAnnotation` protocol.
-It might be helpful to sublcass from existing classes like `MKPlacemark`.
+It might be helpful to subclass from existing classes like `MKPlacemark`.
 
 ```swift
 let annotations: [MapViewAnnotation] = ...
 
-MapView(annotation: self.annotations)
+MapView(annotations: annotations)
 ```
 
-### Selecting annotations
+#### Selecting annotations
 
-A list of selected annotations can be passed in via binding.
-Selecting an annotations updates the binding, and the other way around.
+A list of selected annotations can be passed in via a binding.
 
 ```swift
 @State var selectedAnnotations: [MapViewAnnotation] = []
 
-MapView(selectedAnnotations: self.$selectedAnnotations)
+MapView(selectedAnnotations: $selectedAnnotations)
 ```
 
 ## Contributing
