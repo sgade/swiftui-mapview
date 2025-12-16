@@ -16,11 +16,11 @@ import MapKit
 /// - Seealso: ``MapAnnotationView``
 class MapAnnotationClusterView: MKAnnotationView {
 
-    private static let annotationSize = 32
-    
+    private static let annotationSize: CGFloat = 32
+
     override var annotation: MKAnnotation? {
-        willSet {
-            guard let clusterAnnotation = newValue as? MKClusterAnnotation else {
+        didSet {
+            guard let clusterAnnotation = annotation as? MKClusterAnnotation else {
                 return
             }
 
@@ -31,15 +31,23 @@ class MapAnnotationClusterView: MKAnnotationView {
 
             collisionMode = .circle
 
-            let size = CGSize(width: Self.annotationSize, height: Self.annotationSize)
-            image = drawGlyph(sized: size, colored: mapAnnotation.tintColor, withCount: mapAnnotations.count)
+            image = drawGlyph(
+                sized: CGSize(
+                    width: Self.annotationSize,
+                    height: Self.annotationSize
+                ),
+                colored: mapAnnotation.tintColor,
+                withCount: mapAnnotations.count
+            )
         }
     }
     
-    /**
-     Draws the annotation's glyph.
-     */
-    private func drawGlyph(sized size: CGSize, colored tintColor: UIColor?, withCount count: Int) -> UIImage {
+    /// Draws the annotation's glyph.
+    private func drawGlyph(
+        sized size: CGSize,
+        colored tintColor: UIColor?,
+        withCount count: Int
+    ) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: size)
         return renderer.image { _ in
             // draw background

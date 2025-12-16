@@ -1,5 +1,5 @@
 //
-//  MapAnnotation.swift
+//  MapViewAnnotation.swift
 //  SwiftUIMapView
 //
 //  Created by Sören Gade on 19.02.20.

@@ -16,8 +16,8 @@ import MapKit
 class MapAnnotationView: MKMarkerAnnotationView {
     
     override var annotation: MKAnnotation? {
-        willSet {
-            guard let mapAnnotation = newValue as? MapViewAnnotation else {
+        didSet {
+            guard let mapAnnotation = annotation as? MapViewAnnotation else {
                 return
             }
 
