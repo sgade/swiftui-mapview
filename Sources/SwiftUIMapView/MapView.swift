@@ -78,7 +78,7 @@ public struct MapView: UIViewRepresentable {
         isZoomEnabled: Bool = true,
         isScrollEnabled: Bool = true,
         isRotateEnabled: Bool = true,
-        showsUserLocation: Bool = true,
+        showsUserLocation: Bool = false,
         userTrackingMode: MKUserTrackingMode = .none,
         annotations: [MapViewAnnotation] = [],
         selectedAnnotations: Binding<[MapViewAnnotation]> = .constant([])

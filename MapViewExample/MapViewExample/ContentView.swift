@@ -13,7 +13,7 @@ import MapKit
 struct ContentView: View {
 
     @State
-    var region: MKCoordinateRegion? = MKCoordinateRegion(
+    private var region: MKCoordinateRegion? = MKCoordinateRegion(
         center: .applePark,
         span: MKCoordinateSpan(
             latitudeDelta: 0.05,
@@ -22,23 +22,18 @@ struct ContentView: View {
     )
 
     @State
-    var selectedAnnotations: [MapViewAnnotation] = []
+    private var selectedAnnotations: [MapViewAnnotation] = []
 
-    let type: MKMapType = .standard
-
-    let trackingMode: MKUserTrackingMode = .none
-
-    let annotations: [MapViewAnnotation] = [ExampleAnnotation].examples
-
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
 
     var body: some View {
         VStack {
             MapView(
-                mapType: type,
+                mapType: .standard,
                 region: $region,
-                userTrackingMode: trackingMode,
-                annotations: annotations,
+                showsUserLocation: true,
+                userTrackingMode: .none,
+                annotations: [ExampleAnnotation].examples,
                 selectedAnnotations: $selectedAnnotations
             )
             .edgesIgnoringSafeArea(.all)
