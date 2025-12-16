@@ -11,15 +11,11 @@ import MapKit
 import Combine
 import UIKit
 
-/**
- Displays a map. The contents of the map are provided by the Apple Maps service.
- 
- See the [official documentation](https://developer.apple.com/documentation/mapkit/mkmapview) for more information on the possibilities provided by the underlying service.
- 
- - Author: Sören Gade
- - Copyright: 2020—2022 Sören Gade
- */
-@available(iOS, introduced: 13.0)
+/// Displays a map.
+/// The contents of the map are provided by the Apple Maps service.
+///
+/// See the [official documentation](https://developer.apple.com/documentation/mapkit/mkmapview) for more information
+/// on the possibilities provided by the underlying service.
 @available(iOS, deprecated: 14.0, message: "Please consider using the official Map view.")
 public struct MapView: UIViewRepresentable {
     

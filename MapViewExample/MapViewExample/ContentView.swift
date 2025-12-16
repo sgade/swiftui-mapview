@@ -11,13 +11,13 @@ import CoreLocation
 import MapKit
 
 struct ContentView: View {
-    
+
     let type: MKMapType = .standard
     @State var region: MKCoordinateRegion? = MKCoordinateRegion(center: .applePark, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     let trackingMode: MKUserTrackingMode = .none
     let annotations: [MapViewAnnotation] = [ExampleAnnotation].examples
     @State var selectedAnnotations: [MapViewAnnotation] = []
-    
+
     var body: some View {
         VStack {
             MapView(mapType: self.type,
@@ -25,12 +25,12 @@ struct ContentView: View {
                     userTrackingMode: self.trackingMode,
                     annotations: self.annotations,
                     selectedAnnotations: self.$selectedAnnotations)
-                .edgesIgnoringSafeArea(.all)
-            
+            .edgesIgnoringSafeArea(.all)
+
             ForEach(self.selectedAnnotations.compactMap { $0 as? ExampleAnnotation }) { annotation in
                 Text("\( annotation.title ?? "" )")
             }
-            
+
             if self.region != nil {
                 Text("\( self.regionToString(self.region!) )")
             }
@@ -40,24 +40,20 @@ struct ContentView: View {
             self.requestLocationUsage()
         }
     }
-    
+
     func regionToString(_ region: MKCoordinateRegion) -> String {
         "\(region.center.latitude), \(region.center.longitude)"
     }
-    
+
     let locationManager = CLLocationManager()
     private func requestLocationUsage() {
         self.locationManager.requestWhenInUseAuthorization()
     }
-    
+
 }
 
-#if DEBUG
-struct ContentView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        ContentView()
-    }
-    
+// MARK: - Previews
+
+#Preview {
+    ContentView()
 }
-#endif

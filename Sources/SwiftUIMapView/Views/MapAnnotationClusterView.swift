@@ -9,13 +9,11 @@
 import Foundation
 import MapKit
 
-/**
- Custom annotation view for `MapAnnotation` view clusters.
- 
- This view draws its content itself and therefore has a pretty custom style.
- 
- - SeeAlso: MapAnnotationView
- */
+/// Custom annotation view for ``MapAnnotation`` view clusters.
+///
+/// This view draws its content itself and therefore has a pretty custom style.
+///
+/// - Seealso: ``MapAnnotationView``
 class MapAnnotationClusterView: MKAnnotationView {
 
     private static let annotationSize = 32

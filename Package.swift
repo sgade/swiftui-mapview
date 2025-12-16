@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.10
 
 import PackageDescription
 
@@ -8,11 +8,16 @@ let package = Package(
         .iOS(.v13)
     ],
     products: [
-        .library(name: "SwiftUIMapView", targets: ["SwiftUIMapView"]),
+        .library(
+            name: "SwiftUIMapView",
+            targets: ["SwiftUIMapView"]
+        ),
     ],
     dependencies: [],
     targets: [
-        .target(name: "SwiftUIMapView", dependencies: []),
-        .testTarget(name: "SwiftUIMapViewTests", dependencies: ["SwiftUIMapView"]),
+        .target(
+            name: "SwiftUIMapView",
+            dependencies: []
+        )
     ]
 )

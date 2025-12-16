@@ -9,12 +9,10 @@
 import Foundation
 import MapKit
 
-/**
- Custom annotation view for `MapAnnotation` objects.
- 
- Sets the view's `glyphImage` and `markerTintColor` according to values of the annotation.
- Automatically takes advantage of clustering via an optionally set `clusteringIdentifier`.
- */
+/// Custom annotation view for ``MapAnnotation`` objects.
+///
+/// Sets the view's `glyphImage` and `markerTintColor` according to values of the annotation.
+/// Automatically takes advantage of clustering via an optionally set `clusteringIdentifier`.
 class MapAnnotationView: MKMarkerAnnotationView {
     
     override var annotation: MKAnnotation? {

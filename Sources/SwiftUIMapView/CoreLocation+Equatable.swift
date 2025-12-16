@@ -9,7 +9,9 @@ import Foundation
 import CoreLocation
 import MapKit
 
-extension CLLocationCoordinate2D: Equatable {
+// MARK: - CLLocationCoordinate2D
+
+extension CLLocationCoordinate2D: @retroactive Equatable {
 
     public static func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
@@ -17,7 +19,9 @@ extension CLLocationCoordinate2D: Equatable {
 
 }
 
-extension MKCoordinateSpan: Equatable {
+// MARK: - MKCoordinateSpan
+
+extension MKCoordinateSpan: @retroactive Equatable {
 
     public static func ==(lhs: MKCoordinateSpan, rhs: MKCoordinateSpan) -> Bool {
         lhs.latitudeDelta == rhs.latitudeDelta && lhs.longitudeDelta == rhs.longitudeDelta
