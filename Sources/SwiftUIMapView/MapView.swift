@@ -32,6 +32,12 @@ public struct MapView: UIViewRepresentable {
     @Binding
     private var selectedAnnotations: [MapViewAnnotation]
 
+    /// Annotations that are displayed on the map.
+    ///
+    ///
+    /// See the `selectedAnnotation` binding for more information about user selection of annotations.
+    private let annotations: [MapViewAnnotation]
+
     /// The map type that is displayed.
     private let mapType: MKMapType
 
@@ -53,12 +59,6 @@ public struct MapView: UIViewRepresentable {
 
     /// Sets the map's user tracking mode.
     private let userTrackingMode: MKUserTrackingMode
-
-    /// Annotations that are displayed on the map.
-    ///
-    ///
-    /// See the `selectedAnnotation` binding for more information about user selection of annotations.
-    private let annotations: [MapViewAnnotation]
 
     /// Creates a new MapView.
     ///
@@ -101,28 +101,41 @@ public struct MapView: UIViewRepresentable {
 extension MapView {
 
     public func makeCoordinator() -> Coordinator {
-        Coordinator(for: self)
+        Coordinator()
     }
 
-    public func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
-        // create view
+    public func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         // register custom annotation view classes
-        mapView.register(MapAnnotationView.self,
-                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        mapView.register(MapAnnotationClusterView.self,
-                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+        mapView.register(
+            MapAnnotationView.self,
+            forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier
+        )
+        mapView.register(
+            MapAnnotationClusterView.self,
+            forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier
+        )
 
-        // configure initial view state
-        configureView(mapView, context: context)
+        // perform initial view state
+        configure(
+            mapView,
+            context: context,
+            animated: false
+        )
 
         return mapView
     }
 
-    public func updateUIView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapView>) {
-        // configure view update
-        configureView(mapView, context: context)
+    public func updateUIView(
+        _ mapView: MKMapView,
+        context: Context
+    ) {
+        configure(
+            mapView,
+            context: context,
+            animated: true
+        )
     }
 
 }
@@ -132,16 +145,19 @@ extension MapView {
 private extension MapView {
 
     /// Configures the `mapView`'s state according to the current view state.
-    private func configureView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapView>) {
-        // basic map configuration
-        mapView.mapType = mapType
-        if let mapRegion = region {
-            let region = mapView.regionThatFits(mapRegion)
-            
+    func configure(
+        _ mapView: MKMapView,
+        context: Context,
+        animated: Bool
+    ) {
+        if let region {
+            let region = mapView.regionThatFits(region)
+
             if region.center != mapView.region.center || region.span != mapView.region.span {
-                mapView.setRegion(region, animated: true)
+                mapView.setRegion(region, animated: animated)
             }
         }
+        mapView.mapType = mapType
         mapView.isZoomEnabled = isZoomEnabled
         mapView.isScrollEnabled = isScrollEnabled
         mapView.isRotateEnabled = isRotateEnabled
@@ -150,16 +166,34 @@ private extension MapView {
         
         // annotation configuration
         updateAnnotations(in: mapView)
-        updateSelectedAnnotation(in: mapView)
+        updateSelectedAnnotation(
+            in: mapView,
+            animated: animated
+        )
+
+        // update coordinator with new view instance
+        context.coordinator.onRegionChanged = { region in
+            Task {
+                // avoid modifying state during view update
+                self.region = region
+            }
+        }
+        context.coordinator.onAnnotationSelected = { annotation in
+            selectedAnnotations.append(annotation)
+        }
+        context.coordinator.onAnnotationDeselected = { annotation in
+            guard let index = selectedAnnotations.firstIndex(where: { annotation.isEqual($0) }) else {
+                return
+            }
+            selectedAnnotations.remove(at: index)
+        }
     }
     
-    /**
-     Updates the annotation property of the `mapView`.
-     Calculates the difference between the current and new states and only executes changes on those diff sets.
-     
-     - Parameter mapView: The `MKMapView` to configure.
-     */
-    private func updateAnnotations(in mapView: MKMapView) {
+    /// Updates the annotation property of the `mapView`.
+    /// Calculates the difference between the current and new states and only executes changes on those diff sets.
+    ///
+    /// - Parameter mapView: The ``MKMapView`` to configure.
+    func updateAnnotations(in mapView: MKMapView) {
         let currentAnnotations = mapView.mapViewAnnotations
         // remove old annotations
         let obsoleteAnnotations = currentAnnotations.filter { mapAnnotation in
@@ -174,13 +208,16 @@ private extension MapView {
         mapView.addAnnotations(newAnnotations)
     }
     
-    /**
-     Updates the selection annotations of the `mapView`.
-     Calculates the difference between the current and new selection states and only executes changes on those diff sets.
-     
-     - Parameter mapView: The `MKMapView` to configure.
-     */
-    private func updateSelectedAnnotation(in mapView: MKMapView) {
+    /// Updates the selection annotations of the `mapView`.
+    /// Calculates the difference between the current and new selection states and only executes changes on those diff sets.
+    ///
+    /// - Parameters:
+    ///     - mapView: The ``MKMapView`` to configure.
+    ///     - animated: Whether to animate the change.
+    func updateSelectedAnnotation(
+        in mapView: MKMapView,
+        animated: Bool
+    ) {
         // deselect annotations that are not currently selected
         let oldSelections = mapView.selectedMapViewAnnotations.filter { oldSelection in
             !selectedAnnotations.contains {
@@ -198,7 +235,7 @@ private extension MapView {
             }
         }
         for annotation in newSelections {
-            mapView.selectAnnotation(annotation, animated: true)
+            mapView.selectAnnotation(annotation, animated: animated)
         }
     }
 
@@ -208,46 +245,46 @@ private extension MapView {
 
 public extension MapView {
 
-    class Coordinator: NSObject, MKMapViewDelegate {
+    final class Coordinator: NSObject, MKMapViewDelegate {
 
-        private let context: MapView
+        var onRegionChanged: (MKCoordinateRegion) -> Void = { _ in }
 
-        init(for context: MapView) {
-            self.context = context
-            super.init()
+        var onAnnotationSelected: (MapViewAnnotation) -> Void = { _ in }
+
+        var onAnnotationDeselected: (MapViewAnnotation) -> Void = { _ in }
+
+    }
+
+}
+
+// MARK: MKMapViewDelegate
+
+extension MapView.Coordinator {
+
+    public func mapView(
+        _ mapView: MKMapView,
+        didSelect view: MKAnnotationView
+    ) {
+        guard let mapAnnotation = view.annotation as? MapViewAnnotation else {
+            return
         }
 
-        // MARK: MKMapViewDelegate
-        public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            guard let mapAnnotation = view.annotation as? MapViewAnnotation else {
-                return
-            }
+        onAnnotationSelected(mapAnnotation)
+    }
 
-            DispatchQueue.main.async {
-                self.context.selectedAnnotations.append(mapAnnotation)
-            }
+    public func mapView(
+        _ mapView: MKMapView,
+        didDeselect view: MKAnnotationView
+    ) {
+        guard let mapAnnotation = view.annotation as? MapViewAnnotation else {
+            return
         }
 
-        public func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-            guard let mapAnnotation = view.annotation as? MapViewAnnotation else {
-                return
-            }
+        onAnnotationDeselected(mapAnnotation)
+    }
 
-            guard let index = context.selectedAnnotations.firstIndex(where: { $0.isEqual(mapAnnotation) }) else {
-                return
-            }
-
-            DispatchQueue.main.async {
-                self.context.selectedAnnotations.remove(at: index)
-            }
-        }
-
-        public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-            DispatchQueue.main.async {
-                self.context.region = mapView.region
-            }
-        }
-
+    public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        onRegionChanged(mapView.region)
     }
 
 }

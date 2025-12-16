@@ -12,42 +12,49 @@ import MapKit
 
 struct ContentView: View {
 
+    @State
+    var region: MKCoordinateRegion? = MKCoordinateRegion(
+        center: .applePark,
+        span: MKCoordinateSpan(
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05
+        )
+    )
+
+    @State
+    var selectedAnnotations: [MapViewAnnotation] = []
+
     let type: MKMapType = .standard
-    @State var region: MKCoordinateRegion? = MKCoordinateRegion(center: .applePark, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+
     let trackingMode: MKUserTrackingMode = .none
+
     let annotations: [MapViewAnnotation] = [ExampleAnnotation].examples
-    @State var selectedAnnotations: [MapViewAnnotation] = []
+
+    let locationManager = CLLocationManager()
 
     var body: some View {
         VStack {
-            MapView(mapType: self.type,
-                    region: self.$region,
-                    userTrackingMode: self.trackingMode,
-                    annotations: self.annotations,
-                    selectedAnnotations: self.$selectedAnnotations)
+            MapView(
+                mapType: type,
+                region: $region,
+                userTrackingMode: trackingMode,
+                annotations: annotations,
+                selectedAnnotations: $selectedAnnotations
+            )
             .edgesIgnoringSafeArea(.all)
 
-            ForEach(self.selectedAnnotations.compactMap { $0 as? ExampleAnnotation }) { annotation in
+            ForEach(selectedAnnotations.compactMap { $0 as? ExampleAnnotation }) { annotation in
                 Text("\( annotation.title ?? "" )")
             }
 
-            if self.region != nil {
-                Text("\( self.regionToString(self.region!) )")
+            if let region {
+                Text("\(region.center.latitude), \(region.center.longitude)")
             }
         }
         .onAppear {
             // this is required to display the user's current location
-            self.requestLocationUsage()
+            locationManager.requestWhenInUseAuthorization()
         }
-    }
-
-    func regionToString(_ region: MKCoordinateRegion) -> String {
-        "\(region.center.latitude), \(region.center.longitude)"
-    }
-
-    let locationManager = CLLocationManager()
-    private func requestLocationUsage() {
-        self.locationManager.requestWhenInUseAuthorization()
     }
 
 }

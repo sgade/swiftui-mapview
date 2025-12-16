@@ -9,12 +9,14 @@ import CoreLocation
 
 extension CLLocationCoordinate2D {
     
-    static var inifiniteLoop: CLLocationCoordinate2D = {
-        CLLocationCoordinate2D(latitude: 37.331836, longitude: -122.029604)
-    }()
+    static let inifiniteLoop = CLLocationCoordinate2D(
+        latitude: 37.331836,
+        longitude: -122.029604
+    )
     
-    static var applePark: CLLocationCoordinate2D = {
-        CLLocationCoordinate2D(latitude: 37.334780, longitude: -122.009073)
-    }()
+    static let applePark = CLLocationCoordinate2D(
+        latitude: 37.334780,
+        longitude: -122.009073
+    )
     
 }

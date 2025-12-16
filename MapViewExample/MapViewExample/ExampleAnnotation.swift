@@ -29,11 +29,15 @@ class ExampleAnnotation: NSObject, MapViewAnnotation, Identifiable {
     
 }
 
+// MARK: - Array+ExampleAnnotation
+
 extension Array where Element == ExampleAnnotation {
+
     static var examples: [ExampleAnnotation] = {
         [
             ExampleAnnotation(title: "Apple Park", coordinate: .applePark),
             ExampleAnnotation(title: "Infinite Loop", coordinate: .inifiniteLoop),
         ]
     }()
+
 }
