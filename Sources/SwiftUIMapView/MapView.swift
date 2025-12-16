@@ -16,7 +16,6 @@ import UIKit
 ///
 /// See the [official documentation](https://developer.apple.com/documentation/mapkit/mkmapview) for more information
 /// on the possibilities provided by the underlying service.
-@available(iOS, deprecated: 14.0, message: "Please consider using the official Map view.")
 public struct MapView: UIViewRepresentable {
     
     // MARK: Properties
@@ -88,15 +87,17 @@ public struct MapView: UIViewRepresentable {
         - annotations: A list of `MapAnnotation`s that should be displayed on the map.
         - selectedAnnotation: A binding to the currently selected annotation, or `nil`.
      */
-    public init(mapType: MKMapType = .standard,
-                region: Binding<MKCoordinateRegion?> = .constant(nil),
-                isZoomEnabled: Bool = true,
-                isScrollEnabled: Bool = true,
-                isRotateEnabled: Bool = true,
-                showsUserLocation: Bool = true,
-                userTrackingMode: MKUserTrackingMode = .none,
-                annotations: [MapViewAnnotation] = [],
-                selectedAnnotations: Binding<[MapViewAnnotation]> = .constant([])) {
+    public init(
+        mapType: MKMapType = .standard,
+        region: Binding<MKCoordinateRegion?> = .constant(nil),
+        isZoomEnabled: Bool = true,
+        isScrollEnabled: Bool = true,
+        isRotateEnabled: Bool = true,
+        showsUserLocation: Bool = true,
+        userTrackingMode: MKUserTrackingMode = .none,
+        annotations: [MapViewAnnotation] = [],
+        selectedAnnotations: Binding<[MapViewAnnotation]> = .constant([])
+    ) {
         self.mapType = mapType
         self._region = region
         self.isZoomEnabled = isZoomEnabled
